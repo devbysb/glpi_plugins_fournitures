@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <name>Fournitures Inventory</name>
+    <key>fournitures</key>
+    <state>stable</state>
+    <logo></logo>
+    <description>
+        <short>
+            <fr><![CDATA[Gestion des fournitures. Ce plugin vous permet de gérer les fournitures.]]></fr>
+        </short>
+        <long>
+            <fr><![CDATA[Ce plugin vous permet de gérer les fournitures.<br />]]></fr>
+        </long>
+    </description>
+    <homepage>https://github.com/eldiablo62/glpi_plugins_fournitures.git</homepage>
+    <download>https://github.com/eldiablo62/glpi_plugins_fournitures.git</download>
+    <issues>https://github.com/eldiablo62/glpi_plugins_fournitures.git</issues>
+    <readme>https://github.com/eldiablo62/glpi_plugins_fournitures.git</readme>
+    <authors>
+        <author>Dev</author>
+    </authors>
+    <versions>
+        <version>
+            <num>1.0.0</num>
+            <compatibility>9.1</compatibility>
+        </version>
+    </versions>
+    <langs>
+        <lang>fr_FR</lang>
+    </langs>
+    <license><![CDATA[GPL v2+]]></license>
+    <tags>
+        <fr>
+            <tag>Fournitures</tag>
+            <tag>Inventaire</tag>
+            <tag>Gestion</tag>
+        </fr>
+    </tags>
+</root>
