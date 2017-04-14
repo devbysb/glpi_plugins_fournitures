@@ -3,20 +3,19 @@ include('../../../inc/includes.php');
 
 $plugin = new Plugin();
 if ($plugin->isActivated("environment")) {
-   Html::header(PluginFournituresFourniture::getTypeName(2), '', "assets", "pluginenvironmentdisplay", "fournitures");
+    Html::header(PluginFournituresFourniture::getTypeName(2), '', "assets", "pluginenvironmentdisplay", "fournitures");
 } else {
-   Html::header(PluginFournituresFourniture::getTypeName(2), '', "assets", "pluginfournituresmenu");
+    Html::header(PluginFournituresFourniture::getTypeName(2), '', "assets", "pluginfournituresmenu");
 }
 
 $fourniture = new PluginFournituresFourniture();
 $fourniture->checkGlobal(READ);
 
 if ($fourniture->canView()) {
-
-   Search::show("PluginFournituresFourniture");
+    Search::show("PluginFournituresFourniture");
 
 } else {
-   Html::displayRightError();
+    Html::displayRightError();
 }
 
 Html::footer();

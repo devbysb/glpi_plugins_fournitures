@@ -7,17 +7,17 @@ class PluginFournituresMenu extends CommonGLPI
 {
     public static $rightname = 'plugin_fournitures';
 
-   /**
-    * @return translated
-    */
+    /**
+     * @return translated
+     */
     public static function getMenuName()
     {
         return _n('Fournitures', 'Fournitures', 2, 'fournitures');
     }
 
-   /**
-    * @return array
-    */
+    /**
+     * @return array
+     */
     public static function getMenuContent()
     {
         $menu = array();

@@ -59,16 +59,6 @@ CREATE TABLE `glpi_plugin_fournitures_profiles` (
    KEY `profiles_id` (`profiles_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
-DROP TABLE IF EXISTS `glpi_plugin_fournitures_notificationstates`;
-CREATE TABLE `glpi_plugin_fournitures_notificationstates` (
-   `id` int(11) NOT NULL auto_increment,
-   `states_id` int(11) NOT NULL default '0' COMMENT 'RELATION to glpi_states (id)',
-   PRIMARY KEY  (`id`),
-   KEY `states_id` (`states_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-INSERT INTO `glpi_notificationtemplates` VALUES(NULL, 'FournituresSeuil', 'PluginFournituresFourniture', '2010-02-23 23:44:46','',NULL, '2010-02-23 23:44:46');
-
 INSERT INTO `glpi_displaypreferences` VALUES (NULL,'PluginFournituresFourniture','3','2','0');
 INSERT INTO `glpi_displaypreferences` VALUES (NULL,'PluginFournituresFourniture','4','3','0');
 INSERT INTO `glpi_displaypreferences` VALUES (NULL,'PluginFournituresFourniture','5','4','0');

@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('GLPI_ROOT')) {
-   die("Sorry. You can't access directly to this file");
+    die("Sorry. You can't access directly to this file");
 }
 
 /**
@@ -11,25 +11,28 @@ class PluginFournituresProfile extends CommonDBTM
 {
     static $rightname = "profile";
 
-   /**
-    * @param CommonGLPI $item
-    * @param int $withtemplate
-    * @return string|translated
-    */
+    /**
+     * @param CommonGLPI $item
+     * @param int        $withtemplate
+     *
+     * @return string|translated
+     */
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
         if ($item->getType() == 'Profile') {
             return PluginFournituresFourniture::getTypeName(2);
         }
+
         return '';
     }
 
-   /**
-    * @param CommonGLPI $item
-    * @param int $tabnum
-    * @param int $withtemplate
-    * @return bool
-    */
+    /**
+     * @param CommonGLPI $item
+     * @param int        $tabnum
+     * @param int        $withtemplate
+     *
+     * @return bool
+     */
     public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
     {
         if ($item->getType() == 'Profile') {
@@ -44,12 +47,13 @@ class PluginFournituresProfile extends CommonDBTM
             );
             $prof->showForm($ID);
         }
+
         return true;
     }
 
-   /**
-    * @param $ID
-    */
+    /**
+     * @param $ID
+     */
     static function createFirstAccess($ID)
     {
         //85
@@ -62,23 +66,29 @@ class PluginFournituresProfile extends CommonDBTM
         );
     }
 
-   /**
-    * @param $profiles_id
-    * @param $rights
-    * @param bool $drop_existing
-    * @internal param $profile
-    */
+    /**
+     * @param      $profiles_id
+     * @param      $rights
+     * @param bool $drop_existing
+     *
+     * @internal param $profile
+     */
     static function addDefaultProfileInfos($profiles_id, $rights, $drop_existing = false)
     {
         $profileRight = new ProfileRight();
         foreach ($rights as $right => $value) {
-            if( countElementsInTable('glpi_profilerights',
-                "`profiles_id`='$profiles_id' AND `name`='$right'") && $drop_existing
+            if (countElementsInTable(
+                'glpi_profilerights',
+                "`profiles_id`='$profiles_id' AND `name`='$right'"
+            )
+            && $drop_existing
             ) {
                 $profileRight->deleteByCriteria(array('profiles_id' => $profiles_id, 'name' => $right));
             }
-            if(!countElementsInTable('glpi_profilerights',
-               "`profiles_id`='$profiles_id' AND `name`='$right'")
+            if (!countElementsInTable(
+                'glpi_profilerights',
+                "`profiles_id`='$profiles_id' AND `name`='$right'"
+            )
             ) {
                 $myright['profiles_id'] = $profiles_id;
                 $myright['name'] = $right;
@@ -91,26 +101,27 @@ class PluginFournituresProfile extends CommonDBTM
         }
     }
 
-   /**
-    * Show profile form
-    *
-    * @param int $profiles_id
-    * @param bool $openform
-    * @param bool $closeform
-    * @return nothing
-    * @internal param int $items_id id of the profile
-    * @internal param value $target url of target
-    *
-    */
-    function showForm($profiles_id = 0, $openform = TRUE, $closeform = TRUE)
+    /**
+     * Show profile form
+     *
+     * @param int  $profiles_id
+     * @param bool $openform
+     * @param bool $closeform
+     *
+     * @return nothing
+     * @internal param int $items_id id of the profile
+     * @internal param value $target url of target
+     *
+     */
+    function showForm($profiles_id = 0, $openform = true, $closeform = true)
     {
 
         echo "<div class='firstbloc'>";
         if (($canedit = Session::haveRightsOr(self::$rightname, array(CREATE, UPDATE, PURGE)))
-         && $openform
+            && $openform
         ) {
-             $profile = new Profile();
-             echo "<form method='post' action='" . $profile->getFormURL() . "'>";
+            $profile = new Profile();
+            echo "<form method='post' action='" . $profile->getFormURL() . "'>";
         }
 
         $profile = new Profile();
@@ -119,14 +130,14 @@ class PluginFournituresProfile extends CommonDBTM
         $profile->displayRightsChoiceMatrix(
             $rights,
             array(
-                'canedit' => $canedit,
+                'canedit'       => $canedit,
                 'default_class' => 'tab_bg_2',
-                'title' => __('General')
+                'title'         => __('General')
             )
         );
 
         if ($canedit
-         && $closeform
+            && $closeform
         ) {
             echo "<div class='center'>";
             echo Html::hidden('id', array('value' => $profiles_id));
@@ -135,20 +146,22 @@ class PluginFournituresProfile extends CommonDBTM
             Html::closeForm();
         }
         echo "</div>";
+
         return;
     }
 
-   /**
-    * @param bool $all
-    * @return array
-    */
+    /**
+     * @param bool $all
+     *
+     * @return array
+     */
     static function getAllRights($all = false)
     {
         $rights = array(
             array(
                 'itemtype' => 'PluginFournituresFourniture',
-                'label' => _n('Fourniture', 'Fournitures', 2, 'fournitures'),
-                'field' => 'plugin_fournitures'
+                'label'    => _n('Fourniture', 'Fournitures', 2, 'fournitures'),
+                'field'    => 'plugin_fournitures'
             )
         );
 
@@ -161,12 +174,13 @@ class PluginFournituresProfile extends CommonDBTM
         return $rights;
     }
 
-   /**
-    * Init profiles
-    *
-    * @param $old_right
-    * @return int
-    */
+    /**
+     * Init profiles
+     *
+     * @param $old_right
+     *
+     * @return int
+     */
 
     static function translateARight($old_right)
     {
@@ -185,12 +199,14 @@ class PluginFournituresProfile extends CommonDBTM
         }
     }
 
-   /**
-    * @since 0.85
-    * Migration rights from old system to the new one for one profile
-    * @param $profiles_id the profile ID
-    * @return bool
-    */
+    /**
+     * @since 0.85
+     * Migration rights from old system to the new one for one profile
+     *
+     * @param $profiles_id the profile ID
+     *
+     * @return bool
+     */
     static function migrateOneProfile($profiles_id)
     {
         global $DB;
@@ -200,8 +216,7 @@ class PluginFournituresProfile extends CommonDBTM
             return true;
         }
 
-        foreach ($DB->request('glpi_plugin_fournitures_profiles', "`profiles_id`='$profiles_id'") as $profile_data)
-        {
+        foreach ($DB->request('glpi_plugin_fournitures_profiles', "`profiles_id`='$profiles_id'") as $profile_data) {
             $matching = array(
                 'fournitures' => 'plugin_fournitures'
             );
@@ -215,12 +230,13 @@ class PluginFournituresProfile extends CommonDBTM
                 }
             }
         }
+
         return;
     }
 
-   /**
-    * Initialize profiles, and migrate it necessary
-    */
+    /**
+     * Initialize profiles, and migrate it necessary
+     */
     static function initProfile()
     {
         global $DB;
@@ -232,7 +248,7 @@ class PluginFournituresProfile extends CommonDBTM
                            FROM `glpi_profilerights` 
                            WHERE `profiles_id`='" . $_SESSION['glpiactiveprofile']['id'] . "' 
                               AND `name` LIKE '%plugin_fournitures%'") as $prof) {
-             $_SESSION['glpiactiveprofile'][$prof['name']] = $prof['rights'];
+            $_SESSION['glpiactiveprofile'][$prof['name']] = $prof['rights'];
         }
     }
 

@@ -13,13 +13,13 @@ class PluginFournituresFournitureModele extends CommonDropdown
     static $rightname = "dropdown";
     var $can_be_translated = true;
 
-   /**
-    * @param int $nb
-    * @return translated
-    */
+    /**
+     * @param int $nb
+     *
+     * @return translated
+     */
     static function getModeleName($nb = 0)
     {
         return _n('Modèle de l\'fourniture', 'Modèles de l\'fourniture', $nb, 'fournitures');
     }
-
 }

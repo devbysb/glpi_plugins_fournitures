@@ -1,6 +1,5 @@
 <?php
 
-
 if (!defined('GLPI_ROOT')) {
     die("Sorry. You can't access directly to this file");
 }
@@ -14,19 +13,20 @@ class PluginFournituresFourniture extends CommonDBTM
     public static $rightname = "plugin_fournitures";
     protected $usenotepad = true;
 
-   /**
-    * @param int $nb
-    * @return translated
-    */
+    /**
+     * @param int $nb
+     *
+     * @return translated
+     */
     public static function getTypeName($nb = 0)
     {
         return _n('Fourniture', 'Fournitures', $nb, 'fournitures');
     }
 
 
-   /**
-    * @return array
-    */
+    /**
+     * @return array
+     */
     public function getSearchOptions()
     {
         $tab = array();
@@ -77,8 +77,6 @@ class PluginFournituresFourniture extends CommonDBTM
         $tab[9]['datatype'] = 'datetime';
         $tab[9]['massiveaction'] = false;
 
-
-
         $tab[30]['table'] = $this->getTable();
         $tab[30]['field'] = 'id';
         $tab[30]['name'] = __('ID');
@@ -97,9 +95,10 @@ class PluginFournituresFourniture extends CommonDBTM
     }
 
     /**
-    * @param array $options
-    * @return array
-    */
+     * @param array $options
+     *
+     * @return array
+     */
     public function defineTabs($options = array())
     {
         $ong = array();
@@ -110,75 +109,76 @@ class PluginFournituresFourniture extends CommonDBTM
         return $ong;
     }
 
-   /**
-    * @param $ID
-    * @param array $options
-    * @return bool
-    */
+    /**
+     * @param       $ID
+     * @param array $options
+     *
+     * @return bool
+     */
     public function showForm($ID, $options = array())
     {
         $this->initForm($ID, $options);
         $this->showFormHeader($options);
 
         echo "<tr class='tab_bg_1'>";
-            echo "<td>" . __('Nom') . "</td>";
-            echo "<td>";
-                Html::autocompletionTextField($this, "name");
-            echo "</td>";
+        echo "<td>" . __('Nom') . "</td>";
+        echo "<td>";
+        Html::autocompletionTextField($this, "name");
+        echo "</td>";
 
-            echo "<td>" . __('Type') . "</td><td>";
-            Dropdown::show(
-                'PluginFournituresFournitureType',
-                array(
-                    'name' => "plugin_fournitures_fournituretypes_id",
-                    'value' => $this->fields["plugin_fournitures_fournituretypes_id"]
-                )
-            );
-            echo "</td>";
+        echo "<td>" . __('Type') . "</td><td>";
+        Dropdown::show(
+            'PluginFournituresFournitureType',
+            array(
+                'name'  => "plugin_fournitures_fournituretypes_id",
+                'value' => $this->fields["plugin_fournitures_fournituretypes_id"]
+            )
+        );
+        echo "</td>";
         echo "</tr>";
 
 
         echo "<tr class='tab_bg_1'>";
-            echo "<td>" . __('Marque') . "</td><td>";
-                Dropdown::show(
-                    'PluginFournituresFournitureMarque',
-                    array(
-                        'name' => "plugin_fournitures_fournituremarques_id",
-                        'value' => $this->fields["plugin_fournitures_fournituremarques_id"]
-                    )
-                );
-            echo "</td>";
+        echo "<td>" . __('Marque') . "</td><td>";
+        Dropdown::show(
+            'PluginFournituresFournitureMarque',
+            array(
+                'name'  => "plugin_fournitures_fournituremarques_id",
+                'value' => $this->fields["plugin_fournitures_fournituremarques_id"]
+            )
+        );
+        echo "</td>";
 
-            echo "<td>" . __('Modèle') . "</td><td>";
-                Dropdown::show(
-                    'PluginFournituresFournitureModele',
-                    array(
-                        'name' => "plugin_fournitures_fournituremodeles_id",
-                        'value' => $this->fields["plugin_fournitures_fournituremodeles_id"]
-                    )
-                );
-            echo "</td>";
+        echo "<td>" . __('Modèle') . "</td><td>";
+        Dropdown::show(
+            'PluginFournituresFournitureModele',
+            array(
+                'name'  => "plugin_fournitures_fournituremodeles_id",
+                'value' => $this->fields["plugin_fournitures_fournituremodeles_id"]
+            )
+        );
+        echo "</td>";
         echo "</tr>";
 
         echo "<tr class='tab_bg_1'>";
-            echo "<td>" . __('Quantité') . "</td>";
-            echo "<td>";
-               echo "<input type='text' name='quantite' value='".$this->fields["quantite"]."' />";
-            echo "</td>";
-            echo "<td>" . __('Seuil d\'alerte') . "</td>";
-            echo "<td>";
-                echo "<input type='text' name='seuil' value='".$this->fields["seuil"]."' />";
-            echo "</td>";
+        echo "<td>" . __('Quantité') . "</td>";
+        echo "<td>";
+        echo "<input type='text' name='quantite' value='" . $this->fields["quantite"] . "' />";
+        echo "</td>";
+        echo "<td>" . __('Seuil d\'alerte') . "</td>";
+        echo "<td>";
+        echo "<input type='text' name='seuil' value='" . $this->fields["seuil"] . "' />";
+        echo "</td>";
         echo "</tr>";
 
 
         echo "<tr class='tab_bg_1'>";
-            echo "<td>" . __('Commentaires') . "</td>";
-            echo "<td class='center' colspan='3'>"
-                    ."<textarea cols='115' rows='5' name='comment' >"
-                        .$this->fields["comment"]
-                    ."</textarea>";
-            echo "</td>";
+        echo "<td>" . __('Commentaires') . "</td>";
+        echo "<td class='center' colspan='3'>"
+            . "<textarea cols='115' rows='5' name='comment' >"
+            . $this->fields["comment"]
+            . "</textarea>";
+        echo "</td>";
         echo "</tr>";
 
         $this->showFormButtons($options);
@@ -187,49 +187,56 @@ class PluginFournituresFourniture extends CommonDBTM
     }
 
 
-   //Massive Action
-   /**
-    * @param null $checkitem
-    * @return an
-    */
+    //Massive Action
+    /**
+     * @param null $checkitem
+     *
+     * @return an
+     */
     public function getSpecificMassiveActions($checkitem = null)
     {
         $isadmin = static::canUpdate();
         $actions = parent::getSpecificMassiveActions($checkitem);
 
         if (Session::haveRight('transfer', READ && Session::isMultiEntitiesMode() && $isadmin)
-         && Session::isMultiEntitiesMode()
-         && $isadmin
+            && Session::isMultiEntitiesMode()
+            && $isadmin
         ) {
-           $actions['PluginFournituresFourniture'.MassiveAction::CLASS_ACTION_SEPARATOR.'transfer'] = __('Transfer');
+            $actions['PluginFournituresFourniture' . MassiveAction::CLASS_ACTION_SEPARATOR . 'transfer'] = __('Transfer');
         }
+
         return $actions;
     }
 
 
-   /**
-    * @param MassiveAction $ma
-    * @return bool|false
-    */
+    /**
+     * @param MassiveAction $ma
+     *
+     * @return bool|false
+     */
     public static function showMassiveActionsSubForm(MassiveAction $ma)
     {
         switch ($ma->getAction()) {
             case "transfer":
                 Dropdown::show('Entity');
                 echo Html::submit(_x('button', 'Post'), array('name' => 'massiveaction'));
+
                 return true;
                 break;
         }
+
         return parent::showMassiveActionsSubForm($ma);
     }
 
     /**
      * @since version 0.85
      *
-     * @see CommonDBTM::processMassiveActionsForOneItemtype()
+     * @see   CommonDBTM::processMassiveActionsForOneItemtype()
+     *
      * @param MassiveAction $ma
-     * @param CommonDBTM $item
-     * @param array $ids
+     * @param CommonDBTM    $item
+     * @param array         $ids
+     *
      * @return nothing|void
      */
     public static function processMassiveActionsForOneItemtype(MassiveAction $ma, CommonDBTM $item, array $ids)
@@ -251,6 +258,7 @@ class PluginFournituresFourniture extends CommonDBTM
                 }
                 break;
         }
+
         return;
     }
 
@@ -285,44 +293,70 @@ class PluginFournituresFourniture extends CommonDBTM
      *    <0 : to be run again (not finished)
      *     0 : nothing to do
      */
-    static function cronFournituresSeuil($task) {
+    static function cronFournituresSeuil($task)
+    {
         global $DB, $CFG_GLPI;
 
         $cron_status = 0;
 
-        if (!$CFG_GLPI["use_mailing"]) {
-            return 0;
-        }
-
         $query_alert_fournitures = self::queryAlertFournitures();
 
-        $message = "";
+        $fournitures = array();
         foreach ($DB->request($query_alert_fournitures) as $data) {
             $data['entityName'] = Dropdown::getDropdownName("glpi_entities", $data['entities_id']);
-            $fournitures = $data;
-            $message .= $data['name']." ".$data['type']." ".$data['marque']." ".$data['modele']." ".$data['quantite']." ".$data['seuil']."<br>";
+            $fournitures[] = $data;
         }
 
-        if (NotificationEvent::raiseEvent('FournituresSeuil', new PluginFournituresFourniture(), array('fournitures' => $fournitures))
-        ) {
-            $cron_status = 1;
-            if ($task) {
-                $task->log("Fournitures seuil alerte \n");
-                $task->addVolume(1);
-            } else {
-                Session::addMessageAfterRedirect("Fournitures seuil alerte");
+        if (count($fournitures) > 0) {
+            $mail_content = "<style>
+                                table {
+                                    border-collapse: collapse;
+                                    border: 1px solid black;
+                                    width: 100%;
+                                }
+                                td {
+                                    border: 1px solid black;
+                                }
+                                thead {
+                                    font-weight: bold;
+                                }
+                             </style>";
+            $mail_content .= "Bonjour,<br><br> Les fournitures suivantes sont en dessous du seuil paramétré.<br><br>";
+            $mail_content .= "<table>
+                                <thead>
+                                    <tr>
+                                        <td>Nom</td>
+                                        <td>Type</td>
+                                        <td>Marque</td>
+                                        <td>Modèle</td>
+                                        <td>Quantité</td>
+                                        <td>Seuil</td>
+                                        <td>Entité</td>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+            foreach ($fournitures as $fourniture) {
+                $mail_content .= "<tr>";
+                    $mail_content .= "<td>" .$fourniture['name']."</td>";
+                    $mail_content .= "<td>" .$fourniture['type']."</td>";
+                    $mail_content .= "<td>" .$fourniture['marque']."</td>";
+                    $mail_content .= "<td>" .$fourniture['modele']."</td>";
+                    $mail_content .= "<td>" .$fourniture['quantite']."</td>";
+                    $mail_content .= "<td>" .$fourniture['seuil']."</td>";
+                    $mail_content .= "<td>" .$fourniture['entityName']."</td>";
+                $mail_content .= "</tr>";
             }
-
-        } else {
-            if ($task) {
-                $task->log("Fournitures seuil alerte : L'envoi du message a échoué.\n");
-            } else {
-                Session::addMessageAfterRedirect("Fournitures seuil alerte : L'envoi du message a échoué.\n", false, ERROR);
-            }
+            $mail_content .= "</tbody></table>";
+            $to = "s.bertholon@beauvaisis.fr";
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+            $headers .= 'From: GLPI <glpi@beauvaisis.fr>' . "\r\n";
+            mail($to, "GLPI - Fournitures seuil bas", $mail_content, $headers);
         }
+
+        //var_dump($fournitures);
+        //exit;
 
         return $cron_status;
     }
-
-
 }
